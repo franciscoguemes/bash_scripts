@@ -52,9 +52,13 @@ RIGHT_UPPER_CORNER_XPS13=80x24+1180+110
 LEFT_DOWN_CORNER_XPS13=80x24+86+610
 RIGHT_DOWN_CORNER_XPS13=80x24+1180+610
 
+THIRD_MONITOR_LEFT_UPPER_CORNER_XPS=3900,0
+
 GMAIL=https://mail.google.com/mail/u/0/#inbox
-EVERNOTE=https://www.evernote.com/Home.action?login=true#n=b2c15485-9e2f-445b-9879-377c4e63b5ca&s=s130&b=b6ac1640-a3ff-49f5-82fd-1148b70ee901&ses=4&sh=1&sds=5&
-UNISCON_OUTLOOK=https://outlook.office.com/owa/?realm=uniscon.net&exsvurl=1&ll-cc=3082&modurl=0&path=/mail/inbox
+EVERNOTE=https://www.evernote.com/Login.action
+UNISCON_OUTLOOK=https://outlook.office.com/owa/?realm=uniscon.net
+IDGARD=https://my.idgard.de/#/login
+UNISCON_CONFLUENCE=https://confluence.uniscon-rnd.de/display/BAC/Backoffice
 UNISCON_JIRA=https://jira.uniscon-rnd.de/browse/PM-33
 UNISCON_GITLAB=https://gitlab.uniscon-rnd.de/users/sign_in
 LEO=https://dict.leo.org/spanisch-deutsch
@@ -71,20 +75,25 @@ function startOption1 {
 	
 
 	#Open terminals in differnt possitions in XPS13
-	gnome-terminal --geometry $LEFT_UPPER_CORNER_XPS13 --working-directory=~ -- /bin/bash -c "sudo docker images; /bin/bash "
-	gnome-terminal --geometry $RIGHT_UPPER_CORNER_XPS13 --working-directory=~ -- /bin/bash -c "sudo docker start -ai idgard_6275; /bin/bash "
-	gnome-terminal --geometry $LEFT_DOWN_CORNER_XPS13
-	gnome-terminal --geometry $RIGHT_DOWN_CORNER_XPS13
+	gnome-terminal --geometry $LEFT_UPPER_CORNER_XPS13 --working-directory=~ -- /bin/bash -c "sudo docker images; /bin/bash " & 
+	gnome-terminal --geometry $RIGHT_UPPER_CORNER_XPS13 --working-directory=~ -- /bin/bash -c "sudo docker start -ai idgard_6275; /bin/bash " &
+	gnome-terminal --geometry $LEFT_DOWN_CORNER_XPS13 &
+	gnome-terminal --geometry $RIGHT_DOWN_CORNER_XPS13 &
 
 	#Start Chrome...
-	chromium --new-tab $GMAIL
-	chromium --new-tab $EVERNOTE
-	chromium --new-tab $UNISCON_OUTLOOK
-	chromium --new-tab $UNISCON_JIRA
-	chromium --new-tab $UNISCON_GITLAB
-	chromium --new-tab $LEO
-	chromium --new-tab $WORDREFERENCE
+	chromium --window-position=$THIRD_MONITOR_LEFT_UPPER_CORNER_XPS --new-window \
+		$GMAIL \
+		$EVERNOTE \
+		$UNISCON_OUTLOOK \
+		$IDGARD \
+		$UNISCON_CONFLUENCE \
+		$UNISCON_JIRA \
+		$UNISCON_GITLAB \
+		$LEO \
+		$WORDREFERENCE &
 	
+	#Wait 5 seconds...
+	sleep 5
 
 }
 
@@ -95,13 +104,13 @@ function startOption2 {
 	$ECLIPSE_PATH/eclipse -data $PERSONAL_ECLIPSE_WORKSPACE &
 
 	#Start Chrome...
-	chrome --new-window $GMAIL
-	chromium --new-tab $EVERNOTE
-	chromium --new-tab $LEO
-	chromium --new-tab $WORDREFERENCE
+	chrome --window-position=$THIRD_MONITOR_LEFT_UPPER_CORNER_XPS --new-window \
+		$GMAIL \
+		$EVERNOTE \
+		$LEO \
+		$WORDREFERENCE &
 
 	#Doing whatever...
-
 }
 
 function startOption3 {
