@@ -18,8 +18,8 @@
 #	Switch in bash: http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_07_03.html
 #	Variables in a case of a switch: https://unix.stackexchange.com/questions/234264/how-can-i-use-a-variable-as-a-case-condition
 #	Funcitons in bash: http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO-8.html
-#	
-# 	
+#	Start Chrome with a different user: https://superuser.com/questions/377186/how-do-i-start-chrome-using-a-specified-user-profile
+# 	Chromium directory in ubunt: https://askubuntu.com/questions/1075103/chromium-config-folder-is-missing-in-ubuntu-18-04
 #	
 #	
 #
@@ -54,6 +54,9 @@ RIGHT_DOWN_CORNER_XPS13=80x24+1180+610
 
 THIRD_MONITOR_LEFT_UPPER_CORNER_XPS=3900,0
 
+CHROMIUM_PROFILE_FRANCISCO=Default
+CHROMIUM_PROFILE_UNISCON=Profile\ 1
+
 GMAIL=https://mail.google.com/mail/u/0/#inbox
 EVERNOTE=https://www.evernote.com/Login.action
 UNISCON_OUTLOOK=https://outlook.office.com/owa/?realm=uniscon.net
@@ -68,21 +71,20 @@ function startOption1 {
 	echo "Starting Uniscon environment..."
 
 	#Start eclipse...
-	$ECLIPSE_PATH/eclipse -data $UNISCON_ECLIPSE_WORKSPACE &
+	#$ECLIPSE_PATH/eclipse -data $UNISCON_ECLIPSE_WORKSPACE &
 
 	#Start docker container idgard_6275...
 	#gnome-terminal -- sudo docker start -ai idgard_6275
 	
 
 	#Open terminals in differnt possitions in XPS13
-	gnome-terminal --geometry $LEFT_UPPER_CORNER_XPS13 --working-directory=~ -- /bin/bash -c "sudo docker images; /bin/bash " & 
-	gnome-terminal --geometry $RIGHT_UPPER_CORNER_XPS13 --working-directory=~ -- /bin/bash -c "sudo docker start -ai idgard_6275; /bin/bash " &
-	gnome-terminal --geometry $LEFT_DOWN_CORNER_XPS13 &
+	gnome-terminal --geometry $LEFT_UPPER_CORNER_XPS13 --working-directory=~ -- /bin/bash -c "sudo docker images; /bin/bash " & 	
+	gnome-terminal --geometry $RIGHT_UPPER_CORNER_XPS13 --working-directory=~ -- /bin/bash -c "sudo docker start -ai idgard_BAC-45; /bin/bash " &
+	gnome-terminal --geometry $LEFT_DOWN_CORNER_XPS13 --working-directory=~ -- /bin/bash -c "sudo docker ps -a; /bin/bash " & 
 	gnome-terminal --geometry $RIGHT_DOWN_CORNER_XPS13 &
 
 	#Start Chrome...
-	chromium --window-position=$THIRD_MONITOR_LEFT_UPPER_CORNER_XPS --new-window \
-		$GMAIL \
+	chromium --window-position=$THIRD_MONITOR_LEFT_UPPER_CORNER_XPS --profile-directory="$CHROMIUM_PROFILE_UNISCON" --new-window \
 		$EVERNOTE \
 		$UNISCON_OUTLOOK \
 		$IDGARD \
@@ -91,7 +93,13 @@ function startOption1 {
 		$UNISCON_GITLAB \
 		$LEO \
 		$WORDREFERENCE &
-	
+
+	#Wait 5 seconds...
+	sleep 5
+
+	chromium --window-position=$THIRD_MONITOR_LEFT_UPPER_CORNER_XPS --profile-directory=$CHROMIUM_PROFILE_FRANCISCO --new-window \
+		$GMAIL \ &	
+
 	#Wait 5 seconds...
 	sleep 5
 
@@ -104,7 +112,7 @@ function startOption2 {
 	$ECLIPSE_PATH/eclipse -data $PERSONAL_ECLIPSE_WORKSPACE &
 
 	#Start Chrome...
-	chrome --window-position=$THIRD_MONITOR_LEFT_UPPER_CORNER_XPS --new-window \
+	chromium --window-position=$THIRD_MONITOR_LEFT_UPPER_CORNER_XPS --profile-directory=$CHROMIUM_PROFILE_FRANCISCO --new-window \
 		$GMAIL \
 		$EVERNOTE \
 		$LEO \
