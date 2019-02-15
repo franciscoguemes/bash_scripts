@@ -12,6 +12,8 @@ DASHBOARD_TARGET_DIR=$DASHBOARD_DIR/target
 
 nohup changesListener.sh > /dev/null &
 
-cd $DASHBOARD_TARGET_DIR
+#Change to the directory where the file package.json is. This is the file which contains the instructions on how to build the bundle.js
+cd $DASHBOARD_DIR
 
+#Scans the *.js files in the project for changes and builds the bundle.js file based on the information contained in package.json
 npm run watch
