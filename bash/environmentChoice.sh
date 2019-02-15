@@ -71,16 +71,16 @@ function startOption1 {
 	echo "Starting Uniscon environment..."
 
 	#Start eclipse...
-	#$ECLIPSE_PATH/eclipse -data $UNISCON_ECLIPSE_WORKSPACE &
+	$ECLIPSE_PATH/eclipse -data $UNISCON_ECLIPSE_WORKSPACE &
 
 	#Start docker container idgard_6275...
 	#gnome-terminal -- sudo docker start -ai idgard_6275
 	
-
+	CONTAINER_NAME=BAC-76
 	#Open terminals in differnt possitions in XPS13
-	gnome-terminal --geometry $LEFT_UPPER_CORNER_XPS13 --working-directory=~ -- /bin/bash -c "sudo docker images; /bin/bash " & 	
-	gnome-terminal --geometry $RIGHT_UPPER_CORNER_XPS13 --working-directory=~ -- /bin/bash -c "sudo docker start -ai idgard_BAC-45; /bin/bash " &
-	gnome-terminal --geometry $LEFT_DOWN_CORNER_XPS13 --working-directory=~ -- /bin/bash -c "sudo docker ps -a; /bin/bash " & 
+	gnome-terminal --geometry $LEFT_UPPER_CORNER_XPS13 --working-directory=~ -- /bin/bash -c "set-title Docker Images; sudo docker images; /bin/bash" & 	
+	gnome-terminal --geometry $RIGHT_UPPER_CORNER_XPS13 --working-directory=~ -- /bin/bash -c "set-title $CONTAINER_NAME; sudo docker start -ai $CONTAINER_NAME; /bin/bash " &
+	gnome-terminal --geometry $LEFT_DOWN_CORNER_XPS13 --working-directory=~ -- /bin/bash -c "set-title Docker Containers; sudo docker ps -a; /bin/bash " & 
 	gnome-terminal --geometry $RIGHT_DOWN_CORNER_XPS13 &
 
 	#Start Chrome...
@@ -102,6 +102,9 @@ function startOption1 {
 
 	#Wait 5 seconds...
 	sleep 5
+
+	#Start slack...
+	slack
 
 }
 
