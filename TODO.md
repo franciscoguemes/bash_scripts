@@ -25,6 +25,12 @@
 - clean obsolete code
 - redo the article InstallOpenJDKInUbuntu.md
 
+## mute_ms_teams.sh
+
+- man documentation
+- Header
+- 
+
 
 # TODOs for the future
 
