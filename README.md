@@ -2,6 +2,29 @@
 
 This project contains a collecion of multipurpose bash scripts that I use under Ubuntu Linux.
 
+## Structure of the project
+
+The project is structured in the following directories:
+
+```bash
+.
+├── customize
+│   ├── linux
+│   ├── linux_setup.sh
+│   ├── templates
+│   ├── ubuntu
+│   └── ubuntu_setup.sh
+├── general_purpose
+│   ├── bash
+│   └── python
+└── install.sh
+```
+
+The _general_purpose_ directory contains scripts that will be often called from the command line and therefore are subtle to be include in the `$PATH` variable of your OS.
+
+The scripts under the _customize_ directory are the ones designated to transform your OS in order to get a similar setup than the one I have in my machine. In other words you can get the same Ubuntu customization (UI, extra menu options, etc..) and the same Linux customization (Install packages, extender terminal functions, environment variables, etc...). Inside the _customize_ directory there are the scripts _linux_setup.sh_ and _ubuntu_setup.sh_ to install the respective customizations.
+
+
 
 ## Requirements
 
@@ -26,4 +49,32 @@ python --version
 python3 --version
 ```
 
+## bla bla
 
+```plantuml
+@startuml
+:User: --> (Use)
+"Main Admin" as Admin
+"Use the application" as (Use)
+Admin --> (Admin the application)
+@enduml
+```
+asdfasdf
+
+```plantuml
+@startwbs
+* Business Process Modelling WBS
+** Launch the project
+*** Complete Stakeholder Research
+*** Initial Implementation Plan
+** Design phase
+*** Model of AsIs Processes Completed
+**** Model of AsIs Processes Completed1
+**** Model of AsIs Processes Completed2
+*** Measure AsIs performance metrics
+*** Identify Quick Wins
+** Complete innovate phase
+@endwbs
+```
+
+https://blog.anoff.io/2018-07-31-diagrams-with-plantuml/
