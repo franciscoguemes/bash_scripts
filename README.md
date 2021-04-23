@@ -49,32 +49,3 @@ python --version
 python3 --version
 ```
 
-## bla bla
-
-```plantuml
-@startuml
-:User: --> (Use)
-"Main Admin" as Admin
-"Use the application" as (Use)
-Admin --> (Admin the application)
-@enduml
-```
-asdfasdf
-
-```plantuml
-@startwbs
-* Business Process Modelling WBS
-** Launch the project
-*** Complete Stakeholder Research
-*** Initial Implementation Plan
-** Design phase
-*** Model of AsIs Processes Completed
-**** Model of AsIs Processes Completed1
-**** Model of AsIs Processes Completed2
-*** Measure AsIs performance metrics
-*** Identify Quick Wins
-** Complete innovate phase
-@endwbs
-```
-
-https://blog.anoff.io/2018-07-31-diagrams-with-plantuml/
