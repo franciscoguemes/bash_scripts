@@ -16,13 +16,18 @@
     - Parse arguments
     - Documentation shown with man command
     - Script template
+    - Interpolate some fields during installation:
+      - Author name
+      - Email
 - Complete the TODOs for each script
+- Test with a docker Ubuntu image
 
 
 # Scripts TODOs
 
 ## install_java.sh
 
+- separate repository ???
 - man documentation
 - Header
 - parse arguments & show error
