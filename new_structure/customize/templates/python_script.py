@@ -21,6 +21,7 @@ MY_CONSTANT="Your constant value"
 
 if __name__ == "__main__":
     # Your script starts here...
+    some_error_happened=False
 
     if some_error_happened:
         exit(1) # Abnormal execution so return some error code to the OS
