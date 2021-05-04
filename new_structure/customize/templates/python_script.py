@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 ####################################################################################################
-#Script Name	: commit-msg                                                                                             
+#Script Name	: yourscriptname.py                                                                                             
 #Description	: Here it goes your description
 #                                                                                 
 #Args           : 
