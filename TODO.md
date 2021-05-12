@@ -1,6 +1,9 @@
 
 # Project Basis
 
+- Test with a docker Ubuntu image
+  - Create a docker Ubuntu container for testing
+  - Document how to start the container and how to test the project
 - copy/paste inside the _new_structure_directory each script on its respective folder
 - get the content of the _new_structure_ directory and put it in the root directory
 - Delete the .idea folder
@@ -20,7 +23,7 @@
       - Author name
       - Email
 - Complete the TODOs for each script
-- Test with a docker Ubuntu image
+
 
 
 # Scripts TODOs
