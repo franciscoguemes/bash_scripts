@@ -9,14 +9,15 @@ The project is structured in the following directories:
 ```bash
 .
 ├── customize
-│   ├── linux
-│   ├── linux_setup.sh
-│   ├── templates
-│   ├── ubuntu
-│   └── ubuntu_setup.sh
+│   ├── git
+│   ├── linux
+│   ├── linux_setup.sh
+│   ├── templates
+│   ├── ubuntu
+│   └── ubuntu_setup.sh
 ├── general_purpose
-│   ├── bash
-│   └── python
+│   ├── bash
+│   └── python
 └── install.sh
 ```
 
