@@ -14,16 +14,21 @@
 - Create installation script in the parent folder (A script that - installs the other scripts in the system)
 - Create a proper README.md file
 - Branching strategy
-- Templates:
+- Bash Script templates:
+    - Parse arguments
+    - Interpolate some fields during installation:
+      - Author name
+      - Email
+- Python Script templates:
     - Documentation
     - Parse arguments
-    - Documentation shown with man command
-    - Script template
     - Interpolate some fields during installation:
       - Author name
       - Email
 - Complete the TODOs for each script
-
+- Create man pages for the scripts
+  - https://unix.stackexchange.com/questions/34516/can-i-create-a-man-page-for-a-script
+  - https://www.cyberciti.biz/faq/linux-unix-creating-a-manpage/
 
 
 # Scripts TODOs
@@ -90,3 +95,12 @@ Admin --> (Admin the application)
 
 Source:
  - [Diagrams with plantuml](https://blog.anoff.io/2018-07-31-diagrams-with-plantuml/)
+
+
+
+# Ideas for future scripts
+
+
+## Joint PDFs on right click
+Script that creates a new entry on the right click menu when 2 or more PDF files are selected and merge. If the user selects the option "Merge PDFs" the action will result in a new PDF document that contains all the other PDF documents merged by the sorting name in the OS (Check what is the sorting criteria for filenames in Linux). If there are files selected that are not PDF files (i.e 3 PDF files plus a JPG file, the non PDF files will be ignored).
+
