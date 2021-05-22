@@ -1,0 +1,8 @@
+
+tree
+jq
+docker
+docker-compose
+docker-compose without sudo
+python3
+p7zip-full
