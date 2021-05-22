@@ -50,3 +50,28 @@ python --version
 python3 --version
 ```
 
+## Colaborating with the project
+
+Fell free to colaborate with the project creating a fork of this project and customizing it for your favourite Linux distribution or sugesting new ideas, scripts and customizations for the generic Linux part or the Ubuntu customization.
+
+As any other project there are some rules and standards that I followed when created the project.
+
+### New scripts
+In order to create new scripts, please use the templates located in the folder `templates` of this project and follow the conventions shown in the template such as the documentation header, the documentation in the functions, the naming conventions for global variables, etc...
+
+### TODOs
+The pending tasks will be marked with the _TODO:_ tag and then what is missing. 
+```bash
+TODO: Here a clear description of what is missing
+```
+
+### Interpolation
+All values that will be interpolated during the installation process must be in the format 
+```bash
+<<<KEY_TO_INTERPOLATE>>>
+```
+
+### Interpolation directory
+The interpolation directory will be `.target` inside the current directory.
+
+During the installation process the files are copied to the directory `./.target` and then interpolated. So if you run the installation with the DryRun; inside this directory you can see the source scripts that would be installed in your computer.
