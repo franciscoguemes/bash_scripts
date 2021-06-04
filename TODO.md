@@ -6,7 +6,6 @@
   - Document how to start the container and how to test the project
 - copy/paste inside the _new_structure_directory each script on its respective folder
 - get the content of the _new_structure_ directory and put it in the root directory
-- Delete the .idea folder
 - create a .gitignore
 - Reestructure the project
   - Create directory folder structure
@@ -19,6 +18,7 @@
     - Interpolate some fields during installation:
       - Author name
       - Email
+      - Company name
 - Python Script templates:
     - Documentation
     - Parse arguments
@@ -100,7 +100,11 @@ Source:
 
 # Ideas for future scripts
 
+## Script for checking sha256 on right click
+Script that creates a new entry on the right click menu when a single file is selected and shows a menu called "Checksum" and from here a set of options are displayed such as "sha256", "md5", etc ... When the user selects one of this options (i.e. sha256) a popup textbox is displayed where the user can copy/paste the checksum to be checked.
 
 ## Joint PDFs on right click
 Script that creates a new entry on the right click menu when 2 or more PDF files are selected and merge. If the user selects the option "Merge PDFs" the action will result in a new PDF document that contains all the other PDF documents merged by the sorting name in the OS (Check what is the sorting criteria for filenames in Linux). If there are files selected that are not PDF files (i.e 3 PDF files plus a JPG file, the non PDF files will be ignored).
+
+
 
