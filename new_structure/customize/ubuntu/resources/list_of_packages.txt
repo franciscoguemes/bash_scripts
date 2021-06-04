@@ -1,4 +1,7 @@
 
+
+git
+java-common
 tree
 jq
 docker
