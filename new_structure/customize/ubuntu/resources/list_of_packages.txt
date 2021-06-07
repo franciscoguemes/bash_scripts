@@ -1,11 +1,34 @@
+####################################################################################################
+# All the packages listed here are installed with the Ubuntu packet
+# manager: 
+#           sudo apt-get install PACKET_NAME
+#
+#           sudo apt-get install \
+#               PACKET_1 \
+#               PACKET_2 \
+#               ... \
+#               PACKET_N \
+#
+####################################################################################################
 
 
+# Fix Ubuntu 20.04 lockscreen not working
+# https://askubuntu.com/questions/184728/how-do-i-lock-the-screen-from-a-terminal
+# https://askubuntu.com/questions/1242110/after-upgrading-to-ubuntu-20-04-lockscreen-not-working
+gnome-screensaver
+
+# Utilities and tools
 git
-java-common
 tree
 jq
-docker
-docker-compose
-docker-compose without sudo
-python3
 p7zip-full
+curl
+
+# The java update alternatives
+java-common
+
+
+
+
+
+

@@ -1,14 +1,16 @@
 ####################################################################################################
-# General purpose apps
+# This script installs development applications
 #
 #
 ####################################################################################################
 
-chromium-browser
-keepassxc
-vlc
-pinta
-pencil
-easytag
-master-pdf-editor
 
+
+
+nodejs
+npm
+
+virtualbox
+
+gradle
+Lombok

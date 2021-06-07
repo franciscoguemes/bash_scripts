@@ -1,14 +1,8 @@
 ####################################################################################################
-# General purpose apps
+# List of repositories. This script must be executed after adding the GPG keys.
 #
-#
+# After adding all the repositories the script must do an update:
+#   sudo apt-get update
 ####################################################################################################
 
-chromium-browser
-keepassxc
-vlc
-pinta
-pencil
-easytag
-master-pdf-editor
 

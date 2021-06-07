@@ -1,14 +1,8 @@
 ####################################################################################################
-# General purpose apps
+# This script must run after installing the packages
 #
 #
 ####################################################################################################
 
-chromium-browser
-keepassxc
-vlc
-pinta
-pencil
-easytag
-master-pdf-editor
+
 
