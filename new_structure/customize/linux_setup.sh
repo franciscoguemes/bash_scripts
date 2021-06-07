@@ -1,3 +1,29 @@
+#!/usr/bin/env bash
+####################################################################################################
+#Script Name	: linux_setup.sh                                                                                             
+#Description	: Here it goes your description
+#                                                                                 
+#Args           :                                                                                           
+#Author       	: Francisco Güemes                                                
+#Email         	: francisco@franciscoguemes.com                                           
+#See also	    : https://devhints.io/bash
+#                 https://linuxhint.com/30_bash_script_examples/
+#                 https://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash  
+####################################################################################################
+
+set -ex
+
+# Get the directory where this script is placed
+#   https://stackoverflow.com/a/246128
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+echo $SCRIPT_DIR
+
+TEMPLATES_DIR=/home/$USER/Templates
+
+
+#cp 
+
 
 # TODO: Create a DryRun option and a Verbose option
 #
