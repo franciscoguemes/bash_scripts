@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ####################################################################################################
-#Script Name	: rootless_docker.sh                                                                                             
+#Script Name	: docker_as_non_root_user.sh                                                                                             
 #Description	: This script assumes that docker is installed in your system
 #                                                                                 
 #Args           :                                                                                           
