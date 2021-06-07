@@ -7,6 +7,7 @@ This project contains a collecion of multipurpose bash scripts that I use under 
 The project is structured in the following directories:
 
 ```bash
+tree -L 2 .
 .
 ├── customize
 │   ├── git
@@ -17,8 +18,12 @@ The project is structured in the following directories:
 │   └── ubuntu_setup.sh
 ├── general_purpose
 │   ├── bash
-│   └── python
-└── install.sh
+│   ├── python
+│   └── to_review
+├── install.sh
+├── README.md
+├── Testing.md
+└── TODO.md
 ```
 
 The _general_purpose_ directory contains scripts that will be often called from the command line and therefore are subtle to be include in the `$PATH` variable of your OS.
