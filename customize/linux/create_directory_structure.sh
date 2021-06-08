@@ -14,9 +14,8 @@
 mkdir -p /usr/lib/jvm
 
 # Create user directories
-mkdir -p $HOME/{Downloads,Templates,Documents,Videos,Music,Pictures}
-mkdir -p $HOME/bin
-mkdir -p $HOME/.config
-mkdir -p $HOME/development/{apache-ant,apache-maven,flyway,eclipse,netbeans,gradle}
+mkdir -p $HOME/{Downloads,Templates,Documents/{Nextcloud,$COMPANY},Videos,Music,Pictures}
+mkdir -p $HOME/{bin,.config}
+mkdir -p $HOME/development/{apache-ant,apache-maven,flyway,eclipse,netbeans,gradle}}
 mkdir -p $HOME/git/{$COMPANY,$USER,other}
-mkdir -p $HOME/workspaces/{eclipse,netbeans}
+mkdir -p $HOME/workspaces/{eclipse,netbeans,intellij}
