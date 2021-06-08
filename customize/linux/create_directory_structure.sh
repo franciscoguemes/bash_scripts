@@ -7,7 +7,8 @@
 #Author       	: Francisco Güemes                                                
 #Email         	: francisco@franciscoguemes.com                                           
 #See also	    : 
-# 
+#                   https://stackoverflow.com/questions/17674406/creating-a-full-directory-tree-at-once
+#
 ####################################################################################################
 
 # Create global directories (Execute script as sudo)
