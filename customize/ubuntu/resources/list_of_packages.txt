@@ -23,6 +23,7 @@ tree
 jq
 p7zip-full
 curl
+wget
 
 # The java update alternatives
 java-common
