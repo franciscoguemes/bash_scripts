@@ -17,13 +17,6 @@ set -ex
 #   https://stackoverflow.com/a/246128
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-echo $SCRIPT_DIR
-
-TEMPLATES_DIR=/home/$USER/Templates
-
-
-#cp 
-
 
 # TODO: Create a DryRun option and a Verbose option
 #
