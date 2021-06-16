@@ -29,4 +29,6 @@ $UBUNTU_DIR/install_templates.sh
 # Install packages
 $UBUNTU_DIR/install_packages.sh
 
+# Install gnome-terminal functions
+$UBUNTU_DIR/install_gnome-terminal_functions.sh
 
