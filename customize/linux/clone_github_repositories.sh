@@ -33,7 +33,6 @@ git clone git@github.com:franciscoguemes/tour-operator.git
 git clone git@github.com:franciscoguemes/phaser_tutorials.git
 git clone git@github.com:franciscoguemes/warehouse-api.git
 git clone git@github.com:franciscoguemes/online-tools.git
-git clone git@github.com:franciscoguemes/learninggit.git
-
+git clone git@github.com:franciscoguemes/javamanager.git
 
 
