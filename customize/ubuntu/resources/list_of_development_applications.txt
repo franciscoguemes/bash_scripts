@@ -1,16 +1,8 @@
 ####################################################################################################
-# This script installs development applications
+# Applications use generally for development.
 #
 #
 ####################################################################################################
 
 
-
-
-nodejs
-npm
-
-virtualbox
-
-gradle
 Lombok

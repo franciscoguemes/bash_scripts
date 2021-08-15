@@ -17,19 +17,3 @@
 # https://askubuntu.com/questions/1242110/after-upgrading-to-ubuntu-20-04-lockscreen-not-working
 gnome-screensaver
 
-# Utilities and tools
-git
-tree
-jq
-p7zip-full
-curl
-wget
-
-# The java update alternatives
-java-common
-
-
-
-
-
-
