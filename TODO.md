@@ -33,6 +33,29 @@
 
 # Scripts TODOs
 
+## Java
+  ### install_gradle.sh
+  ### install_maven.sh
+  ### install_eclipse.sh
+  ### install_intellij.sh
+
+## JS
+  ### install_NVM.sh
+  ### install_NodeJS
+  ### install_Postman.sh ???
+  ### install_Newman.sh
+  ### install_Postman_Collection_Transformer.sh
+  ### install_visual_studio_code.sh
+
+## DEVOPS
+  ### install_docker.sh
+  ### install_docker-compose.sh
+  ### install_kubectl.sh
+  ### install_minikube.sh
+  ### install_helm.sh
+  ### install_azure.sh
+  
+
 ## install_java.sh
 
 - separate repository ???
