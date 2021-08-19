@@ -13,3 +13,4 @@
 
 postman
 slack
+# chromium
