@@ -14,6 +14,13 @@
 #
 ####################################################################################################
 
+# TODO: All my gitlab projects are private so I need to login first before I can access/clone any
+#       repository
+
+# TODO: Better than hardcode here all the respositories, get the repositories URL/names from
+#       this url: https://gitlab.com/users/franciscoguemes/projects
+
+
 # Go to the right directory
 cd /home/$USER/git/$USER/gitlab
 

@@ -14,6 +14,10 @@
 #
 ####################################################################################################
 
+
+# TODO: Better than hardcode here all the respositories, get the repositories URL/names from
+#       this url: https://github.com/franciscoguemes?tab=repositories
+
 # Go to the right directory
 cd /home/$USER/git/$USER/github
 
