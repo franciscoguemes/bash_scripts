@@ -108,6 +108,50 @@ VARIABLE_1="Your variable definition"
 VARIABLE_2="Another variable definition"
 yourfunction $VARIABLE_1 $VARIABLE_2 # call to your function and pass two arguments
 
-RESULT="$(yourfunction)" # Take yourfunction output result and store it in variable
+# Take yourfunction output result and store it in variable
+result="$(yourfunction)" 
+result="$(anotherfunction $(yourfunction))" 
 
+#Concatenation of strings
+variables="$VARIABLE_1$VARIABLE_2"
+variables_and_literal_text="${VARIABLE_1}My literal string ${VARIABLE_2}"
+command_output_and_literal_text="The date of today is: $(date)"
 
+#Iterate over files
+for filename in `pwd`; do
+    echo $filename
+done
+
+#Iterate over numbers
+echo "Counting sheeps..."
+for ((i=0; i<=3; i++)); do
+    echo "    $1"
+    sleep $i #Sleeping for seconds...
+done
+
+#Read input
+echo -n "Enter the name of a country: "
+read COUNTRY
+
+#Echoing in the same line...
+echo -n "The official language of $COUNTRY is "
+
+#Switch - case
+case $COUNTRY in
+
+  Lithuania)
+    echo -n "Lithuanian"
+    ;;
+
+  Romania | Moldova)
+    echo -n "Romanian"
+    ;;
+
+  Italy | "San Marino" | Switzerland | "Vatican City")
+    echo -n "Italian"
+    ;;
+
+  *)
+    echo -n "unknown"
+    ;;
+esac
