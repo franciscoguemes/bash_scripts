@@ -100,6 +100,12 @@ function yourfunction {
 
 
 #-----------------------------------------------------------------------------
+# Load functions from the other_script.sh file
+#-----------------------------------------------------------------------------
+source $(dirname "$0")/other_script.sh
+
+
+#-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 # Start of the script
@@ -108,7 +114,14 @@ VARIABLE_1="Your variable definition"
 VARIABLE_2="Another variable definition"
 yourfunction $VARIABLE_1 $VARIABLE_2 # call to your function and pass two arguments
 
-# Take yourfunction output result and store it in variable
+if [ $? -eq 0 ]
+then
+    echo "Last command in your function was successful"
+else
+    echo "ERROR: The last command in your function failed with code: $?" >&2
+fi
+
+# Take your function output result and store it in variable
 result="$(yourfunction)" 
 result="$(anotherfunction $(yourfunction))" 
 
@@ -120,6 +133,7 @@ command_output_and_literal_text="The date of today is: $(date)"
 #Iterate over files
 for filename in `pwd`; do
     echo $filename
+    echo $filename | grep -oE "[[:digit:]]{8}_[[:digit:]]{6}" #Matching dates in file names
 done
 
 #Iterate over numbers
