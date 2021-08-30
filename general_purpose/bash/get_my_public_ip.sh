@@ -13,7 +13,7 @@
 #                 https://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash  
 ####################################################################################################
 
-set -ex
+#set -eux
 
 #-----------------------------------------------------------------------------
 # Site variable definition.
