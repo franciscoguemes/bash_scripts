@@ -31,6 +31,8 @@ vlc
 kazam
 # https://askubuntu.com/questions/107726/how-to-create-animated-gif-images-of-a-screencast
 peek
+# Animations
+pencil2d
 
 
 #****************************************************************************************************
