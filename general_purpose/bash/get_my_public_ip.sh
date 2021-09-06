@@ -8,9 +8,8 @@
 #Args           :                                                                                           
 #Author       	: Francisco Güemes                                                
 #Email         	: francisco@franciscoguemes.com                                           
-#See also	    : https://devhints.io/bash
-#                 https://linuxhint.com/30_bash_script_examples/
-#                 https://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash  
+#See also	    : https://askubuntu.com/questions/95910/command-for-determining-my-public-ip
+#                   
 ####################################################################################################
 
 #set -eux
@@ -25,4 +24,6 @@ curl -s $SITE | grep -Eo "([[:digit:]]{1,3}\.){3}[[:digit:]]{1,3}"
 # The exact same functionality as before but with a PCRE regex. Note the -P argument in grep.
 #curl -s $SITE | grep -Po "(\d{1,3}\.){3}\d{1,3}"
 
+# The exact same functionality but using a third party API:
+#curl https://ipinfo.io/ip
 
