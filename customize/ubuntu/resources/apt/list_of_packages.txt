@@ -17,3 +17,20 @@
 # https://askubuntu.com/questions/1242110/after-upgrading-to-ubuntu-20-04-lockscreen-not-working
 gnome-screensaver
 
+# A nautilus extension to customize Nautilus through Python scripts
+python-nautilus
+
+# To create GTK dialogue boxes from the terminal/scripts
+zenity
+
+#****************************************************************************************************
+# Python3 related packages...
+#****************************************************************************************************
+# Package manager system for Python3
+python3-pip
+# Package to create virtual environments in Python3
+python3.8-venv
+# tkinter package for Python
+python3-tk
+
+

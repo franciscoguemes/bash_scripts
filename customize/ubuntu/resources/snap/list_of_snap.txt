@@ -15,3 +15,6 @@ postman
 slack
 # chromium
 yq
+
+# sudo snap install --classic heroku
+heroku
