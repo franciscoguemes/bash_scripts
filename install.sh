@@ -1,3 +1,61 @@
+#!/usr/bin/env bash
+####################################################################################################
+#Script Name	: yourscriptname.sh                                                                                             
+#Description	: Here it goes your description
+#                                                                                 
+#Args           :                                                                                           
+#Author         : Francisco Güemes
+#Email          : francisco@franciscoguemes.com                                          
+#See also	    : https://devhints.io/bash
+#                 https://linuxhint.com/30_bash_script_examples/
+#                 https://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash  
+####################################################################################################
+
+
+#set -ex
+
+
+#–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# This function prints the directory where the script that calls the function is located.
+# i.e:
+#   "/home/user1/my_scripts/script1.sh"   ---> "/home/user1/my_scripts"
+#   "cd /home/user1; ./my_scripts/script1.sh"   ---> "/home/user1/my_scripts"
+#
+# OUTPUTS:
+#   The function will print the directory where the script that calls this function is located.
+#–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+function get_script_directory {
+#  SOURCE="${BASH_SOURCE[0]}"
+  SOURCE=$0
+  while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+    DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+    SOURCE="$(readlink "$SOURCE")"
+    [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+  done
+  DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+  echo $DIR
+}
+
+
+#The base directory (absolute path ) for this project i.e. (/home/francisco/git/francisco/github/bash_scripts)
+BASE_DIR=$(get_script_directory)
+
+#-----------------------------------------------------------------------------
+# Load functions from the commons/paths.sh file
+#-----------------------------------------------------------------------------
+source $BASE_DIR/commons/paths.sh
+
+
+
+
+
+
+
+# for filename in /Data/*.txt; do
+#     for ((i=0; i<=3; i++)); do
+#         ./MyProgram.exe "$filename" "Logs/$(basename "$filename" .txt)_Log$i.txt"
+#     done
+# done
 
 
 # Go through each script on the folders:

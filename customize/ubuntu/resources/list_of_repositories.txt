@@ -5,4 +5,5 @@
 #   sudo apt-get update
 ####################################################################################################
 
-
+# This repository is needed to install xournalpp
+sudo add-apt-repository ppa:apandada1/xournalpp-stable

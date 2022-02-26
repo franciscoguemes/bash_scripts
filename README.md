@@ -26,9 +26,9 @@ tree -L 2 .
 └── TODO.md
 ```
 
-The _general_purpose_ directory contains scripts that will be often called from the command line and therefore are subtle to be include in the `$PATH` variable of your OS.
+The _general_purpose_ directory contains scripts that will be often called from the command line and therefore are subtle to be included in the `$PATH` variable of your OS.
 
-The scripts under the _customize_ directory are the ones designated to transform your OS in order to get a similar setup than the one I have in my machine. In other words you can get the same Ubuntu customization (UI, extra menu options, etc..) and the same Linux customization (Install packages, extender terminal functions, environment variables, etc...). Inside the _customize_ directory there are the scripts _linux_setup.sh_ and _ubuntu_setup.sh_ to install the respective customizations.
+The scripts under the _customize_ directory are the ones designated to transform your OS in order to get a similar setup than the one I have in my machine. In other words you can get the same Ubuntu customization (UI, extra menu options, etc..) and the same Linux customization (Installed packages, extender terminal functions, environment variables, etc...). Inside the _customize_ directory there are the scripts _linux_setup.sh_ and _ubuntu_setup.sh_ to install the respective customizations.
 
 
 
