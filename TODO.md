@@ -34,6 +34,8 @@
 # Scripts TODOs
 
 ## Java
+  ### install_sdkman.sh
+  ### install_JDK.sh
   ### install_gradle.sh
   ### install_maven.sh
   ### install_eclipse.sh
@@ -48,11 +50,12 @@
   ### install_visual_studio_code.sh
 
 ## DEVOPS
-  ### install_docker.sh
-  ### install_docker-compose.sh
-  ### install_kubectl.sh
-  ### install_minikube.sh
-  ### install_helm.sh
+  ### install_docker.sh (See mdwiki & existing script)
+  ### docker_no_sudo.sh (See mdwiki)
+  ### install_docker-compose.sh (See mdwiki)
+  ### install_kubectl.sh (See mdwiki)
+  ### install_minikube.sh (See mdwiki)
+  ### install_helm.sh (See mdwiki)
   ### install_azure.sh
   
 
