@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#Comando: scan fichero_salida.tif
-#Ejemplo: scan myPassport.tif
+# Command: ./scan.sh fichero_salida.tif
+# Example: ./scan.sh myPassport.tif
 
 # If you do not have the file /usr/share/color/icc/RGB/AdobeRGB1998.icc your can download it from:
 #   https://supportdownloads.adobe.com/product.jsp?product=62&platform=Windows

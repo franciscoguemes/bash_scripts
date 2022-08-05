@@ -17,10 +17,6 @@ for f in *.tif
 do
     echo "Converting $f"
     convert "$f"  "$(basename "$f" .tif).jpg"
+    convert "$(basename "$f" .tif).jpg"  "$(basename "$f" .jpg).pdf"
 done
 
-for f in *.jpg
-do
-    echo "Converting $f"
-    convert "$f"  "$(basename "$f" .jpg).pdf"
-done
