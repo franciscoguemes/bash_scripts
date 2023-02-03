@@ -26,6 +26,13 @@ import os
 import subprocess
 import enum
 import traceback
+import logging
+
+
+#Switch logging level to WARNING after development
+#https://docs.python.org/3/howto/logging.html
+logging.basicConfig(level=logging.DEBUG)
+# logging.basicConfig(filename='example.log', filemode='w', level=logging.DEBUG)
 
 # Constants definitions
 FILE_NAME=".sdkmanrc"
@@ -48,7 +55,7 @@ def eprint(*args, **kwargs):
 def delete_sdkmanrc():
     if os.path.exists(FILE_NAME):
         os.remove(FILE_NAME)
-        print(f"The file {FILE_NAME} was deleted.")
+        logging.debug(f"The file {FILE_NAME} was deleted.")
 
 
 def check_sdkmanrc_exists():
@@ -76,7 +83,8 @@ def list(sdk: Sdk):
         result = subprocess.run([sdk.help_script], capture_output=True, text=True)
         result = result.stdout
     except FileNotFoundError as e:
-        eprint(f"The help script {sdk.help_script} can not be found!")
+        # eprint(f"The help script {sdk.help_script} can not be found!")
+        logging.error(f"The help script {sdk.help_script} can not be found!",  exc_info=True)
         # https://stackoverflow.com/questions/1483429/how-do-i-print-an-exception-in-python
         #traceback.print_exc()
     return result
@@ -149,12 +157,13 @@ if __name__ == "__main__":
     #print(f"The current directory of the script is: {current_directory}")
 
     if check_sdkmanrc_exists():
-        print(f"The file {FILE_NAME} already exists.")
+        logging.error(f"The file {FILE_NAME} already exists.")
+        # print(f"The file {FILE_NAME} already exists.")
         exit(1) # Abnormal execution so return some error code to the OS
 
     java = Sdk("Java", "java", "./general_purpose/python/list_java.sh")
     maven = Sdk("Maven", "maven", "./general_purpose/python/list_maven.sh")
-    gradle = Sdk("Gradle", "gradle", "./general_purpose/python/list_gradle.sh")
+    gradle = Sdk("Gradle", "gradle", "./general_purpose/python/list_gradlew.sh")
     groovy = Sdk("Groovy", "groovy", "./general_purpose/python/list_groovy.sh")
 
     java_pairs=get_pairs_for(java)
@@ -162,7 +171,8 @@ if __name__ == "__main__":
     gradle_pairs=get_pairs_for(gradle)
     groovy_pairs=get_pairs_for(groovy)
 
-    print(f"The file {FILE_NAME} would be created here!")
+    # print(f"The file {FILE_NAME} would be created here!")
+    logging.debug(f"The file {FILE_NAME} will be created at:{os.getcwd()}")
     with open(FILE_NAME, "w") as file:
         file.write(SDKMANRC_HEADER)
 
