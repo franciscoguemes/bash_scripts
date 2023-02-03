@@ -74,7 +74,7 @@ class Sdk():
         return "#" + self.name + "="
 
 
-def list(sdk: Sdk):
+def get_list_of_versions(sdk: Sdk):
     result = ""
     try:
         #print(f"The help script is {sdk.help_script}")
@@ -87,6 +87,8 @@ def list(sdk: Sdk):
         logging.error(f"The help script {sdk.help_script} can not be found!",  exc_info=True)
         # https://stackoverflow.com/questions/1483429/how-do-i-print-an-exception-in-python
         #traceback.print_exc()
+    # logging.debug(f"Versions for {sdk.name}:")
+    # logging.debug(result)
     return result
 
 
@@ -98,7 +100,7 @@ def get_pairs_for(sdk: Sdk):
 
 
 def get_pairs_from_table(sdk: Sdk):
-    versions_as_multiline_string = list(sdk)
+    versions_as_multiline_string = get_list_of_versions(sdk)
     lines=versions_as_multiline_string.splitlines()
     selected_lines=[]
     for line in lines:
@@ -116,7 +118,7 @@ def get_pairs_from_table(sdk: Sdk):
 
 
 def get_pairs_from_list(sdk: Sdk):
-    versions_as_multiline_string = list(sdk)
+    versions_as_multiline_string = get_list_of_versions(sdk)
     lines=versions_as_multiline_string.splitlines()
     selected_lines=[]
     for line in lines:
@@ -163,7 +165,7 @@ if __name__ == "__main__":
 
     java = Sdk("Java", "java", "./general_purpose/python/list_java.sh")
     maven = Sdk("Maven", "maven", "./general_purpose/python/list_maven.sh")
-    gradle = Sdk("Gradle", "gradle", "./general_purpose/python/list_gradlew.sh")
+    gradle = Sdk("Gradle", "gradle", "./general_purpose/python/list_gradle.sh")
     groovy = Sdk("Groovy", "groovy", "./general_purpose/python/list_groovy.sh")
 
     java_pairs=get_pairs_for(java)
