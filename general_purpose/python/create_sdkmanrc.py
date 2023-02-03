@@ -11,10 +11,6 @@
 ####################################################################################################
 
 # TODOs:
-# 1 - Finish the listing for:
-#   1.1 - maven
-#   1.2 - gradle
-#   1.3 - groovy
 # 2 - Place the auxiliar scripts on its own directory under bash scripts directory
 # 3 - See how to get where this script is located and based on that the path of the auxiliar scripts
 # 4 - Comment the deletion of the .sdkmanrc file
@@ -28,6 +24,8 @@ import sys
 import re   
 import os
 import subprocess
+import enum
+import traceback
 
 # Constants definitions
 FILE_NAME=".sdkmanrc"
@@ -43,6 +41,10 @@ HEADER_TEMPLATE="""
 """.strip()
 
 
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
+
+
 def delete_sdkmanrc():
     if os.path.exists(FILE_NAME):
         os.remove(FILE_NAME)
@@ -55,37 +57,43 @@ def check_sdkmanrc_exists():
     return False
 
 
-def list_java():
-    # https://stackoverflow.com/questions/4760215/running-shell-command-and-capturing-the-output
-    # https://stackoverflow.com/questions/13745648/running-bash-script-from-within-python
-    result = subprocess.run(["./general_purpose/python/list_java.sh"], capture_output=True, text=True)
-    return result.stdout
+class Sdk():
+    def __init__(self, title, name, help_script):
+        self.title = title
+        self.name = name
+        self.help_script = help_script
 
-def list_maven():
-    # https://stackoverflow.com/questions/4760215/running-shell-command-and-capturing-the-output
-    # https://stackoverflow.com/questions/13745648/running-bash-script-from-within-python
-    result = subprocess.run(["./general_purpose/python/list_maven.sh"], capture_output=True, text=True)
-    return result.stdout
-
-def list_gradle():
-    # https://stackoverflow.com/questions/4760215/running-shell-command-and-capturing-the-output
-    # https://stackoverflow.com/questions/13745648/running-bash-script-from-within-python
-    result = subprocess.run(["./general_purpose/python/list_gradle.sh"], capture_output=True, text=True)
-    return result.stdout
-
-def list_groovy():
-    # https://stackoverflow.com/questions/4760215/running-shell-command-and-capturing-the-output
-    # https://stackoverflow.com/questions/13745648/running-bash-script-from-within-python
-    result = subprocess.run(["./general_purpose/python/list_groovy.sh"], capture_output=True, text=True)
-    return result.stdout
+    def get_pair_left_side(self):
+        return "#" + self.name + "="
 
 
-def get_pairs_from_table(java_versions_as_multiline_string, left_pair):
-    lines=java_versions_as_multiline_string.splitlines()
+def list(sdk: Sdk):
+    result = ""
+    try:
+        #print(f"The help script is {sdk.help_script}")
+        # https://stackoverflow.com/questions/4760215/running-shell-command-and-capturing-the-output
+        # https://stackoverflow.com/questions/13745648/running-bash-script-from-within-python
+        result = subprocess.run([sdk.help_script], capture_output=True, text=True)
+        result = result.stdout
+    except FileNotFoundError as e:
+        eprint(f"The help script {sdk.help_script} can not be found!")
+        # https://stackoverflow.com/questions/1483429/how-do-i-print-an-exception-in-python
+        #traceback.print_exc()
+    return result
 
+
+def get_pairs_for(sdk: Sdk):
+    if sdk.name == "java":
+        return get_pairs_from_table(sdk)
+    else:        
+        return get_pairs_from_list(sdk)
+
+
+def get_pairs_from_table(sdk: Sdk):
+    versions_as_multiline_string = list(sdk)
+    lines=versions_as_multiline_string.splitlines()
     selected_lines=[]
     for line in lines:
-        # print(line)
         if "|" in line:
             #https://www.geeksforgeeks.org/python-append-string-to-list/
             selected_lines+=[line]
@@ -94,33 +102,33 @@ def get_pairs_from_table(java_versions_as_multiline_string, left_pair):
     java_pairs=[]
     for line in selected_lines:
         columns=line.split("|")
-        # print(columns)
-        # print(columns[4])
         if columns[4].strip():
-            java_pairs+=[left_pair + columns[5].strip()]
+            java_pairs+=[sdk.get_pair_left_side() + columns[5].strip()]
     return java_pairs
 
 
-def get_paris_from_list(maven_versions_as_multiline_string, left_pair):
-    # print(maven_versions_as_multiline_string)
-    lines=maven_versions_as_multiline_string.splitlines()
-    # print(lines)
+def get_pairs_from_list(sdk: Sdk):
+    versions_as_multiline_string = list(sdk)
+    lines=versions_as_multiline_string.splitlines()
     selected_lines=[]
     for line in lines:
         if "." in line:
             selected_lines+=[line]
-    #print(selected_lines)     
+    
     maven_pairs=[]
     for line in selected_lines:
         columns=line.split("    ")
         for column in columns:
             if "*" in column:
-                maven_pairs+=[left_pair + column.replace(">","").replace("*","").strip()]
-    # print(maven_pairs)
+                maven_pairs+=[sdk.get_pair_left_side() + column.replace(">","").replace("*","").strip()]
+    
     return maven_pairs
 
 
-def append_pairs(file, pairs, title):
+def append_pairs(file, pairs: list, title: str):
+    if not pairs:
+        return
+
     file.write("\n")
     file.write("\n")
     file.write(HEADER_TEMPLATE.format(title))
@@ -131,9 +139,6 @@ def append_pairs(file, pairs, title):
 
 
 if __name__ == "__main__":
-    # Your script starts here...
-    #some_error_happened=False
-
     delete_sdkmanrc()
 
     #pwd
@@ -147,24 +152,21 @@ if __name__ == "__main__":
         print(f"The file {FILE_NAME} already exists.")
         exit(1) # Abnormal execution so return some error code to the OS
 
-    java_pairs = get_pairs_from_table(list_java(), "#java=")
-    maven_pairs = get_paris_from_list(list_maven(), "#maven=")
-    gradle_pairs = get_paris_from_list(list_gradle(), "#gradle=")
-    groovy_pairs = get_paris_from_list(list_groovy(), "#groovy=")
+    java = Sdk("Java", "java", "./general_purpose/python/list_java.sh")
+    maven = Sdk("Maven", "maven", "./general_purpose/python/list_maven.sh")
+    gradle = Sdk("Gradle", "gradle", "./general_purpose/python/list_gradle.sh")
+    groovy = Sdk("Groovy", "groovy", "./general_purpose/python/list_groovy.sh")
 
+    java_pairs=get_pairs_for(java)
+    maven_pairs=get_pairs_for(maven)
+    gradle_pairs=get_pairs_for(gradle)
+    groovy_pairs=get_pairs_for(groovy)
 
     print(f"The file {FILE_NAME} would be created here!")
-
     with open(FILE_NAME, "w") as file:
         file.write(SDKMANRC_HEADER)
 
-        append_pairs(file, java_pairs, "Java")      
-        append_pairs(file, maven_pairs, "Maven")
-        append_pairs(file, gradle_pairs, "Gradle")
-        append_pairs(file, groovy_pairs, "Groovy")
-
-
-        # for line in selected_lines:
-        #     file.write(line)
-        #     file.write("\n")
-
+        append_pairs(file, java_pairs, java.title)      
+        append_pairs(file, maven_pairs, maven.title)
+        append_pairs(file, gradle_pairs, gradle.title)
+        append_pairs(file, groovy_pairs, groovy.title)
