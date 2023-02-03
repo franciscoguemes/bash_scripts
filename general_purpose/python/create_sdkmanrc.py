@@ -43,10 +43,6 @@ HEADER_TEMPLATE="""
 """.strip()
 
 
-def get_header_for(text):
-    return HEADER_TEMPLATE.format(text)
-
-
 def delete_sdkmanrc():
     if os.path.exists(FILE_NAME):
         os.remove(FILE_NAME)
@@ -71,8 +67,20 @@ def list_maven():
     result = subprocess.run(["./general_purpose/python/list_maven.sh"], capture_output=True, text=True)
     return result.stdout
 
+def list_gradle():
+    # https://stackoverflow.com/questions/4760215/running-shell-command-and-capturing-the-output
+    # https://stackoverflow.com/questions/13745648/running-bash-script-from-within-python
+    result = subprocess.run(["./general_purpose/python/list_gradle.sh"], capture_output=True, text=True)
+    return result.stdout
 
-def get_java_pairs(java_versions_as_multiline_string):
+def list_groovy():
+    # https://stackoverflow.com/questions/4760215/running-shell-command-and-capturing-the-output
+    # https://stackoverflow.com/questions/13745648/running-bash-script-from-within-python
+    result = subprocess.run(["./general_purpose/python/list_groovy.sh"], capture_output=True, text=True)
+    return result.stdout
+
+
+def get_pairs_from_table(java_versions_as_multiline_string, left_pair):
     lines=java_versions_as_multiline_string.splitlines()
 
     selected_lines=[]
@@ -89,12 +97,12 @@ def get_java_pairs(java_versions_as_multiline_string):
         # print(columns)
         # print(columns[4])
         if columns[4].strip():
-            java_pairs+=["#java=" + columns[5].strip()]
+            java_pairs+=[left_pair + columns[5].strip()]
     return java_pairs
 
 
-def get_maven_pairs(maven_versions_as_multiline_string):
-    print(maven_versions_as_multiline_string)
+def get_paris_from_list(maven_versions_as_multiline_string, left_pair):
+    # print(maven_versions_as_multiline_string)
     lines=maven_versions_as_multiline_string.splitlines()
     # print(lines)
     selected_lines=[]
@@ -107,26 +115,17 @@ def get_maven_pairs(maven_versions_as_multiline_string):
         columns=line.split("    ")
         for column in columns:
             if "*" in column:
-                maven_pairs+=["#maven=" + column.replace(">","").replace("*","").strip()]
+                maven_pairs+=[left_pair + column.replace(">","").replace("*","").strip()]
     # print(maven_pairs)
     return maven_pairs
 
 
-def append_java_pairs(file, java_pairs):
+def append_pairs(file, pairs, title):
     file.write("\n")
     file.write("\n")
-    file.write(get_header_for("Java"))
+    file.write(HEADER_TEMPLATE.format(title))
     file.write("\n")
-    for pair in java_pairs:
-        file.write(pair)
-        file.write("\n")
-
-def append_maven_pairs(file, maven_pairs):
-    file.write("\n")
-    file.write("\n")
-    file.write(get_header_for("Maven"))
-    file.write("\n")
-    for pair in maven_pairs:
+    for pair in pairs:
         file.write(pair)
         file.write("\n")
 
@@ -148,8 +147,10 @@ if __name__ == "__main__":
         print(f"The file {FILE_NAME} already exists.")
         exit(1) # Abnormal execution so return some error code to the OS
 
-    # java_pairs = get_java_pairs(list_java())
-    maven_pairs = get_maven_pairs(list_maven())
+    java_pairs = get_pairs_from_table(list_java(), "#java=")
+    maven_pairs = get_paris_from_list(list_maven(), "#maven=")
+    gradle_pairs = get_paris_from_list(list_gradle(), "#gradle=")
+    groovy_pairs = get_paris_from_list(list_groovy(), "#groovy=")
 
 
     print(f"The file {FILE_NAME} would be created here!")
@@ -157,8 +158,10 @@ if __name__ == "__main__":
     with open(FILE_NAME, "w") as file:
         file.write(SDKMANRC_HEADER)
 
-        # append_java_pairs(file, java_pairs)        
-        append_maven_pairs(file, maven_pairs)
+        append_pairs(file, java_pairs, "Java")      
+        append_pairs(file, maven_pairs, "Maven")
+        append_pairs(file, gradle_pairs, "Gradle")
+        append_pairs(file, groovy_pairs, "Groovy")
 
 
         # for line in selected_lines:
