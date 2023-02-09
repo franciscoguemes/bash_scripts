@@ -70,8 +70,11 @@ class Sdk():
         self.name = name
         self.help_script = help_script
 
-    def get_pair_left_side(self):
-        return "#" + self.name + "="
+    def get_used_version_left_side(self):
+        return self.name + "="
+
+    def get_unused_pair_left_side(self):
+        return "#" + self.get_used_version_left_side()
 
 
 def get_list_of_versions(sdk: Sdk):
@@ -113,7 +116,10 @@ def get_pairs_from_table(sdk: Sdk):
     for line in selected_lines:
         columns=line.split("|")
         if columns[4].strip():
-            java_pairs+=[sdk.get_pair_left_side() + columns[5].strip()]
+            if columns[1].strip():
+                java_pairs+=[sdk.get_used_version_left_side() + columns[5].strip()]
+            else:
+                java_pairs+=[sdk.get_unused_pair_left_side() + columns[5].strip()]
     return java_pairs
 
 
@@ -130,8 +136,10 @@ def get_pairs_from_list(sdk: Sdk):
         columns=line.split("    ")
         for column in columns:
             if "*" in column:
-                maven_pairs+=[sdk.get_pair_left_side() + column.replace(">","").replace("*","").strip()]
-    
+                if ">" in column:
+                    maven_pairs+=[sdk.get_used_version_left_side() + column.replace(">","").replace("*","").strip()]
+                else:
+                    maven_pairs+=[sdk.get_unused_pair_left_side() + column.replace("*","").strip()]
     return maven_pairs
 
 
@@ -163,10 +171,10 @@ if __name__ == "__main__":
         # print(f"The file {FILE_NAME} already exists.")
         exit(1) # Abnormal execution so return some error code to the OS
 
-    java = Sdk("Java", "java", "./general_purpose/python/list_java.sh")
-    maven = Sdk("Maven", "maven", "./general_purpose/python/list_maven.sh")
-    gradle = Sdk("Gradle", "gradle", "./general_purpose/python/list_gradle.sh")
-    groovy = Sdk("Groovy", "groovy", "./general_purpose/python/list_groovy.sh")
+    java = Sdk("Java", "java", "./general_purpose/python/sdkmanrc/list_java.sh")
+    maven = Sdk("Maven", "maven", "./general_purpose/python/sdkmanrc/list_maven.sh")
+    gradle = Sdk("Gradle", "gradle", "./general_purpose/python/sdkmanrc/list_gradle.sh")
+    groovy = Sdk("Groovy", "groovy", "./general_purpose/python/sdkmanrc/list_groovy.sh")
 
     java_pairs=get_pairs_for(java)
     maven_pairs=get_pairs_for(maven)
