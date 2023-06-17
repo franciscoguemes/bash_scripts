@@ -10,6 +10,13 @@
 #
 ####################################################################################################
 
+# Create a script that scans the existing `.sdkmanrc` file and generates
+# a dictionary of sdk-version as output
+
+# This script takes as input the existing versioning dictionary and generates
+# as output the updated `.sdkmanrc` file
+
+
 # TODOs:
 # 2 - Place the auxiliar scripts on its own directory under bash scripts directory
 # 3 - See how to get where this script is located and based on that the path of the auxiliar scripts
