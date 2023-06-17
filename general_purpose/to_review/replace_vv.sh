@@ -19,18 +19,102 @@
 #                 https://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash  
 ####################################################################################################
 
-
-# valid options
+# Options
 #  -h , --help
 #  -v , --verbose 
 #  -R , --recursive  (Only applies for directories)
-#
-#
-# parse arguments
-# if argument is a file then process the file
-# if argument is a directory then process the directory contents
-#
-#
+RECURSIVE=1
+VERBOSE=1
+DRY_RUN=1
+
+# Arguments:
+#   if argument is a file then process the file
+#   if argument is a directory then process the directory contents
+#   if no argument is supplied then process the $PWD directory
+#   if multiple arguments are supplied, then the arguments are parsed one by one
+ARGUMENTS=()
+
+
+# Function to display usage instructions
+function usage() {
+    echo "Usage: ./$0 [OPTIONS]"
+    echo "Options:"
+    echo "  --help       Display this help message"
+    echo "  --verbose    Enable verbose mode"
+    echo "  --recursive  Enable recursive mode"
+    echo "  --dry-run    Enable dry-run mode"
+}
+
+
+function parse_arguments {
+    local SHORT_OPTIONS="hvRd"
+    local LONG_OPTIONS=("help","verbose","recursive","dry-run")
+
+    ! getopt --test > /dev/null 
+    if [[ ${PIPESTATUS[0]} -ne 4 ]]; then
+        echo 'I’m sorry, `getopt --test` failed in this environment.'
+        exit 1
+    fi
+
+    ! PARSED=$(getopt --options=$SHORT_OPTIONS --longoptions=$LONG_OPTIONS --name "$0" -- "$@")
+    if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+        # e.g. return value is 1
+        #  then getopt has complained about wrong arguments to stdout
+        exit 2
+    fi
+
+    eval set -- "$PARSED"
+
+    # now enjoy the options in order and nicely split until we see --
+    while true; do
+        echo "parsing $1"
+        case "$1" in
+            -h|--help)
+                usage
+                exit 0
+                ;;
+            -R|--recursive)
+                RECURSIVE=0
+                shift
+                ;;
+            -v|--verbose)
+                VERBOSE=0
+                shift
+                ;;
+            -d|--dry-run)
+                DRY_RUN=0
+                shift
+                ;;
+            --)
+                shift
+                break
+                ;;
+            *)
+                echo "Programming error"
+                exit 3
+                ;;
+        esac
+    done
+
+    # echo $RECURSIVE $VERBOSE $DRY_RUN
+    # echo "here $@"
+
+    if [[ $# -eq 0 ]]; then
+        ARGUMENTS+=($PWD)
+    else
+        ARGUMENTS=($@)
+    fi
+
+    # echo "arguments length ${#ARGUMENTS[@]}"
+    
+}
+
+
+parse_arguments $@
+
+exit
+
+
 #
 #
 # function process_directory DIRECTORY
@@ -58,6 +142,12 @@
 #
 #
 #####################################################################################
+
+
+##################################################################################
+#
+# Form here down is to be deleted
+#
 
 set -ex
 
