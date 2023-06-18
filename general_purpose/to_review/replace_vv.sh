@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 ####################################################################################################
 #Args           : 
-#                   $1  What is the first argument?
-#                   $2  What is the second argument?
+#                   $1 directory or file 1 
+#                   $2 directory or file 2 
 #                   ...
-#                   $n  What is the n-th argument?                                                                                         
-#Usage          :   Typical example of usage of the script...                                                                                            
-#Output stdout  :   What is the output of the script in stdout?
-#Output stderr  :   What is the output of the script in stderr?
-#Return code    :   Which status code does the script returns to the OS?
-#Description	: Here it goes your description
+#                   $n directory or file N
+#Usage          :   ./replave_vv.sh -vR directory1 file2.txt                                                                                     
+#Output stdout  :   
+#Output stderr  :   
+#Return code    :   
+#Description	: Replaces the characters 'vv' and 'VV' by 'w' and 'W'
 #                                                                                                                                                           
 #Author       	: Francisco Güemes                                                
 #Email         	: francisco@franciscoguemes.com                                           
