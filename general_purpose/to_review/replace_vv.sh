@@ -10,6 +10,7 @@
 #Output stderr  :   
 #Return code    :   
 #Description	: Replaces the characters 'vv' and 'VV' by 'w' and 'W'
+#                 execute the 'set_test.sh' script to set the test environment
 #                                                                                                                                                           
 #Author       	: Francisco Güemes                                                
 #Email         	: francisco@franciscoguemes.com                                           
