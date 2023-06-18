@@ -23,6 +23,7 @@
 #  -h , --help
 #  -v , --verbose 
 #  -R , --recursive  (Only applies for directories)
+#  -d , --dry-run    
 RECURSIVE=1
 VERBOSE=1
 DRY_RUN=1
@@ -47,8 +48,8 @@ function usage() {
 
 
 function parse_arguments {
-    local SHORT_OPTIONS="hvRd"
-    local LONG_OPTIONS=("help","verbose","recursive","dry-run")
+    local -r SHORT_OPTIONS="hvRd"
+    local -r LONG_OPTIONS=("help","verbose","recursive","dry-run")
 
     ! getopt --test > /dev/null 
     if [[ ${PIPESTATUS[0]} -ne 4 ]]; then
@@ -67,7 +68,7 @@ function parse_arguments {
 
     # now enjoy the options in order and nicely split until we see --
     while true; do
-        echo "parsing $1"
+        #echo "parsing $1"
         case "$1" in
             -h|--help)
                 usage
@@ -96,8 +97,8 @@ function parse_arguments {
         esac
     done
 
-    # echo $RECURSIVE $VERBOSE $DRY_RUN
-    # echo "here $@"
+    #echo $RECURSIVE $VERBOSE $DRY_RUN
+    #echo "here $@"
 
     if [[ $# -eq 0 ]]; then
         ARGUMENTS+=($PWD)
@@ -105,12 +106,74 @@ function parse_arguments {
         ARGUMENTS=($@)
     fi
 
-    # echo "arguments length ${#ARGUMENTS[@]}"
-    
+    #echo "arguments length ${#ARGUMENTS[@]}"
+    #echo ${ARGUMENTS[@]}
 }
 
 
+function fix_name {
+    FILE="$1"
+    NEW_FILE=${FILE//vv/w}
+    NEW_FILE=${NEW_FILE//VV/W}
+    if [[ "$FILE" != "$NEW_FILE" ]]; then
+        mv "$FILE" "$NEW_FILE"
+    fi
+    echo "$NEW_FILE"
+}
+
+function fix_contents {
+    local FILE="$1"
+    echo "Sed over file: $FILE"
+    sleep 3
+    sed -i 's/vv/w/g; s/VV/W/g' "$FILE" 
+    if [[ $? -ne 0 ]]; then
+        echo "ERROR processing file: $FILE ..."
+        exit 1
+    fi
+}
+
+function process_file {
+    local FILE="$1"
+    if [[ $VERBOSE ]]; then
+        echo "Processing file: $FILE ..."
+    fi
+	FILE=$(fix_name "$FILE")
+	fix_contents "$FILE"
+}
+
+function process_directory {
+    local DIRECTORY="$1"
+    if [[ $VERBOSE ]]; then
+        echo "Processing directory: $DIRECTORY ..."
+    fi
+    DIRECTORY=$(fix_name "$DIRECTORY")
+    elements=( $(ls "$DIRECTORY") )
+    for element in "${elements[@]}"; do
+        path="${DIRECTORY}/${element}"
+        if [[ -d "$path" ]]; then
+            process_directory "$path"
+        else
+            process_file "$path"
+        fi
+    done
+}
+
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
 parse_arguments $@
+
+for argument in "${ARGUMENTS[@]}"; do
+    if [[ $VERBOSE ]]; then
+        echo "Processing argument: $argument ..."
+    fi
+    if [[ -f $argument ]]; then
+        process_file "$argument"
+    else
+        process_directory "$argument"
+    fi
+done
+
+IFS=$SAVEIFS
 
 exit
 
