@@ -118,22 +118,44 @@ function parse_arguments {
     #echo ${ARGUMENTS[@]}
 }
 
+function print_verbose {
+    if [[ $VERBOSE -eq 0 ]]; then
+        echo "$@"
+    fi
+}
+
+function is_invalid_name {
+    local -r FILE=$(basename "$1")
+    local -r PATTERN="(vv|VV)"
+    if [[ "$FILE" =~ $PATTERN ]]; then
+        return 0
+    fi
+    return 1
+}
+
+function is_valid_name {
+    if is_invalid_name "$1"; then
+        return 1
+    fi
+    return 0
+}
 
 function fix_name {
     # Do not echo anything in this function because that return garbage as file name
-    FILE="$1"
-    NEW_FILE=${FILE//vv/w}
+    local FILE=$(basename "$1")
+    local DIRECTORY=$(dirname "$1")
+    local NEW_FILE=${FILE//vv/w}
     NEW_FILE=${NEW_FILE//VV/W}
     if [[ "$FILE" != "$NEW_FILE" ]]; then
-        mv "$FILE" "$NEW_FILE"
+        mv "$DIRECTORY/$FILE" "$DIRECTORY/$NEW_FILE"
     fi
-    echo "$NEW_FILE"
+    echo "$DIRECTORY/$NEW_FILE"
 }
 
 function fix_contents {
     local FILE="$1"
-    echo "Sed over file: $FILE"
-    sleep 3
+    #echo "Sed over file: $FILE"
+    #sleep 3
     sed -i 's/vv/w/g; s/VV/W/g' "$FILE" 
     if [[ $? -ne 0 ]]; then
         echo "ERROR processing file: $FILE ..."
@@ -143,19 +165,25 @@ function fix_contents {
 
 function process_file {
     local FILE="$1"
-    if [[ $VERBOSE ]]; then
-        echo "Processing file: $FILE ..."
-    fi
-	FILE=$(fix_name "$FILE")
+    print_verbose "Processing file: $FILE ..."
+    if is_invalid_name "$FILE"; then
+        OLD_FILE=$FILE
+        #echo "old file: $OLD_FILE"
+        FILE=$(fix_name "$FILE")
+        #echo "new file: $FILE"
+        print_verbose "Renamed file: \"$OLD_FILE\" to \"$FILE\""
+    fi   
 	fix_contents "$FILE"
 }
 
 function process_directory {
     local DIRECTORY="$1"
-    if [[ $VERBOSE ]]; then
-        echo "Processing directory: $DIRECTORY ..."
-    fi
-    DIRECTORY=$(fix_name "$DIRECTORY")
+    print_verbose "Processing directory: $DIRECTORY ..."
+    if is_invalid_name "$DIRECTORY"; then
+        OLD_DIRECTORY=$DIRECTORY
+        DIRECTORY=$(fix_name "$DIRECTORY")
+        print_verbose "Renamed directory: \"$OLD_DIRECTORY\" to \"$DIRECTORY\""
+    fi    
     elements=( $(ls "$DIRECTORY") )
     for element in "${elements[@]}"; do
         path="${DIRECTORY}/${element}"
@@ -172,9 +200,12 @@ IFS=$(echo -en "\n\b")
 parse_arguments $@
 
 for argument in "${ARGUMENTS[@]}"; do
-    if [[ $VERBOSE ]]; then
-        echo "Processing argument: $argument ..."
-    fi
+    #print_verbose "Processing argument: $argument ..."
+    # if is_valid_name "$argument"; then
+    #     echo "is valid name"
+    # else
+    #     echo "is invalid name"
+    # fi
     if [[ -f $argument ]]; then
         process_file "$argument"
     else
