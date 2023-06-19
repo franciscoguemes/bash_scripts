@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+####################################################################################################
+#Args           : 
+#                                                                                                 
+#Usage          :   
+#Output stdout  :   
+#Output stderr  :   
+#Return code    :   
+#Description	: Test the replace_vv.sh script
+#                                                                                                                                                           
+#Author       	: Francisco Güemes                                                
+#Email         	: francisco@franciscoguemes.com                                           
+#See also	    : 
+#                   https://www.cyberciti.biz/tips/handling-filenames-with-spaces-in-bash.html
+#  
+####################################################################################################
+
+readonly SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+readonly PROJECT_DIR=$(dirname "$SCRIPT_DIR")
+readonly TEST_DIR=${PROJECT_DIR}/test
+readonly TARGET_DIR=${PROJECT_DIR}/target
+readonly RESOURCES_DIR=${TEST_DIR}/resources
+
+readonly SCRIPT_NAME=$(basename $0)
+readonly BASE_NAME=${SCRIPT_NAME//.test}
+#echo "basename $BASE_NAME"
+readonly EXECUTABLE=${TARGET_DIR}/$BASE_NAME.sh
+readonly INPUTS_DIR=${TARGET_DIR}/$BASE_NAME
+
+#echo "-v -- $EXECUTABLE $INPUTS_DIR/blabla"
+$EXECUTABLE -v -- "$INPUTS_DIR/blabla"
+
+# echo "$EXECUTABLE $INPUTS_DIR/blabla"
+# $EXECUTABLE "$INPUTS_DIR/vvhat the fuck"
+
+# echo "$EXECUTABLE $INPUTS_DIR/kk.txt $INPUTS_DIR/pedo1.txt"
+# $EXECUTABLE "$INPUTS_DIR/kk.txt" "$INPUTS_DIR/pedo1.txt"
