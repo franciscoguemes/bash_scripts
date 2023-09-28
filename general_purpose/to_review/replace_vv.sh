@@ -25,6 +25,11 @@
 # 1- Do the recursive functionality
 # 2- Do the verbose functionality
 # 3- Do the dry-run functionality
+#
+# To know where to run the command execute:
+#   grep -rn --binary-files=without-match '/home/francisco/Documents/Nextcloud/' -e 'vv'
+#   grep -rn --binary-files=without-match '/home/francisco/Documents/Nextcloud/' -e 'VV'
+#
 
 
 # Options

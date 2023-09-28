@@ -27,6 +27,15 @@ readonly BASE_NAME=${SCRIPT_NAME//.test}
 readonly EXECUTABLE=${TARGET_DIR}/$BASE_NAME.sh
 readonly INPUTS_DIR=${TARGET_DIR}/$BASE_NAME
 
+
+############################################################################
+# TC 1:
+#
+#
+# Expected result:
+#
+#
+############################################################################
 #echo "-v -- $EXECUTABLE $INPUTS_DIR/blabla"
 $EXECUTABLE -v -- "$INPUTS_DIR/blabla"
 
